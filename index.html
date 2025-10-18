@@ -28,7 +28,7 @@
     <div class="roulette">
       <div class="wheel" id="wheel"></div>
       <div class="center-circle">
-        <img src="LOGONOBACKGROUND.png" alt="Watta Sushi" class="center-logo">
+     
       </div>
     </div>
   </div>
@@ -108,9 +108,40 @@
         <button class="admin-btn critical" onclick="disableAdmin()">
           🔒 ОТКЛЮЧИТЬ АДМИНКУ НАВСЕГДА
         </button>
+        <button class="admin-btn stress" onclick="startStressTest()">
+          🚀 СТРЕСС-ТЕСТ (100 пользователей)
+        </button>
       </div>
       
       <div class="admin-log" id="adminLog"></div>
+      
+      <!-- Секция стресс-теста -->
+      <div class="stress-test-section" id="stressTestSection" style="display: none;">
+        <h3>🚀 Стресс-тест в процессе...</h3>
+        <div class="stress-progress">
+          <div class="progress-bar">
+            <div class="progress-fill" id="stressProgressFill"></div>
+          </div>
+          <div class="progress-text" id="stressProgressText">0/100</div>
+        </div>
+        <div class="stress-stats">
+          <div class="stat-item">
+            <span class="stat-label">Успешно:</span>
+            <span class="stat-value success" id="stressSuccess">0</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-label">Ошибки:</span>
+            <span class="stat-value error" id="stressErrors">0</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-label">Время:</span>
+            <span class="stat-value" id="stressTime">0с</span>
+          </div>
+        </div>
+        <button class="admin-btn danger" onclick="stopStressTest()" id="stopStressBtn">
+          ⏹️ Остановить тест
+        </button>
+      </div>
       
       <button class="admin-close-btn" onclick="closeAdminPanel()">Закрыть</button>
     </div>
