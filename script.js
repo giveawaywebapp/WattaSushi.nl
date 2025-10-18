@@ -703,7 +703,7 @@ window.closeMinigame = function() {
   const gameState = {
   isPlaying: false,
   score: 0,
-  time: 10,
+  time: 15,
   indicatorPosition: 50, // процент від висоти
   indicatorVelocity: 0,
   zonePosition: 50,
@@ -720,14 +720,14 @@ window.startFishingGame = function() {
   
   gameState.isPlaying = true;
   gameState.score = 0;
-  gameState.time = 10;
+  gameState.time = 15;
   gameState.indicatorPosition = 50;
   gameState.indicatorVelocity = 0;
   gameState.zonePosition = Math.random() * 60 + 20; // 20-80%
   
   
   document.getElementById('gameScore').textContent = '0';
-  document.getElementById('gameTimer').textContent = '10';
+  document.getElementById('gameTimer').textContent = '15';
   
    
   const tapButton = document.getElementById('tapButton');
@@ -761,7 +761,7 @@ function handleTap() {
   if (!gameState.isPlaying) return;
   
  
-  gameState.indicatorVelocity = -2.5; // Було -4, стало -2.5 (слабее)
+  gameState.indicatorVelocity = -3; // Було -4, стало -2.5 (слабее)
 }
 
 function startGameLoop() {
