@@ -1964,7 +1964,7 @@ button:disabled {
     border-left: clamp(8px, 2.5vw, 10px) solid transparent !important;
     border-right: clamp(8px, 2.5vw, 10px) solid transparent !important;
     border-top: clamp(16px, 5vw, 20px) solid #12522D !important;
-    top: -25px !important;
+    top: 8px !important;
   }
 
   .controls {
