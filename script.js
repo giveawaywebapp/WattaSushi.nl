@@ -188,9 +188,18 @@ function showControls() {
   controls.classList.remove('hidden');
   controls.classList.add('visible');
   
-  // Скрываем результат
+  // Скрываем результат и промо-секцию
   resultEl.classList.add('hidden');
   resultEl.classList.remove('visible');
+  
+  const promoSection = document.getElementById('promoSection');
+  promoSection.classList.add('hide');
+  promoSection.classList.remove('show');
+  
+  // Убираем класс hide после завершения анимации
+  setTimeout(() => {
+    promoSection.classList.remove('hide');
+  }, 300);
   
   // Включаем интерактивность
   input.disabled = false;
@@ -198,6 +207,22 @@ function showControls() {
   
   // Очищаем поле ввода
   input.value = '';
+}
+
+function showPromo() {
+  const controls = document.querySelector('.controls');
+  const promoSection = document.getElementById('promoSection');
+  
+  // Скрываем контролы
+  controls.classList.add('hidden');
+  controls.classList.remove('visible');
+  
+  // Скрываем результат
+  resultEl.classList.add('hidden');
+  resultEl.classList.remove('visible');
+  
+  // Показываем промо-секцию
+  promoSection.classList.add('show');
 }
 
 // Запускаем анимацию при загрузке страницы
@@ -519,9 +544,9 @@ spinBtn.onclick = async () => {
             `Приз: ${checkResult.data.prize}\n` +
             `Дата: ${checkResult.data.timestamp}`);
       
-      // Показываем контролы обратно
+      // Показываем промо-секцию
       setTimeout(() => {
-        showControls();
+        showPromo();
       }, 1000);
       return;
     }
@@ -531,9 +556,9 @@ spinBtn.onclick = async () => {
     resultEl.textContent = '❌ Помилка з сервером';
     resultEl.style.color = '#e74c3c';
     
-    // Показываем контролы обратно
+    // Показываем промо-секцию
     setTimeout(() => {
-      showControls();
+      showPromo();
     }, 1000);
     return;
   }
@@ -622,9 +647,9 @@ window.closePrizeModal = function() {
   const modal = document.getElementById('prizeModal');
   modal.classList.remove('active');
   
-  // Восстанавливаем контролы после закрытия модального окна
+  // Показываем промо-секцию после закрытия модального окна
   setTimeout(() => {
-    showControls();
+    showPromo();
   }, 300); // Небольшая задержка для плавности
 };
 
@@ -667,9 +692,9 @@ window.closeMinigame = function() {
   document.getElementById('gamePlay').style.display = 'none';
   document.getElementById('gameEnd').style.display = 'none';
   
-  // Восстанавливаем контролы после закрытия миниигры
+  // Показываем промо-секцию после закрытия миниигры
   setTimeout(() => {
-    showControls();
+    showPromo();
   }, 300);
   
   
