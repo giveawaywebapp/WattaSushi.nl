@@ -24,7 +24,7 @@ body {
   width: 100vw;
   max-height: 100vh;
   max-width: 100vw;
-  padding: 110px 15px 20px 15px; /* Отступ сверху для фиксированного хедера (100px + 10px запас) */
+  padding: 15vh 2vw 3vh 2vw; /* Процентные отступы с учетом хедера */
   position: fixed; /* Фиксируем позицию */
   top: 0;
   left: 0;
@@ -129,165 +129,6 @@ body {
   z-index: 100 !important;
 }
 
-/* Дополнительно для мобильных - увеличиваем область клика */
-@media (max-width: 768px) {
-  .floating-emoji.shrimp {
-    font-size: 55px !important; /* Чуть больше на мобильных, но не выделяется */
-    /* Сохраняем стиль обычных эмоджи */
-  }
-
-  /* Еще больше область клика на мобильных */
-  .floating-emoji.shrimp::before {
-    width: 150px !important; /* Огромная область для легкого тапа */
-    height: 150px !important;
-  }
-
-  /* Оптимизация миниигры для мобильных */
-  .minigame-container {
-    width: 95% !important;
-    max-width: 95% !important;
-    padding: 20px 15px !important;
-    max-height: 95vh !important;
-    overflow-y: auto !important;
-  }
-
-  .minigame-container h2 {
-    font-size: 28px !important;
-    margin-bottom: 15px !important;
-  }
-
-  .minigame-container .emoji {
-    font-size: 60px !important;
-    margin: 15px 0 !important;
-  }
-
-  .minigame-container p {
-    font-size: 16px !important;
-    margin: 10px 0 !important;
-  }
-
-  /* Игровой бар - адаптация под мобильные */
-  .fishing-bar-container {
-    width: 100% !important;
-  }
-
-  .fishing-bar {
-    height: 350px !important; /* Немного ниже для мобильных */
-    width: 100% !important;
-  }
-
-  .fishing-zone {
-    height: 90px !important; /* Чуть больше зона для удобства на мобильных */
-  }
-
-  .fishing-indicator {
-    width: 50px !important;
-    height: 50px !important;
-    font-size: 26px !important;
-  }
-
-  /* ОГРОМНАЯ кнопка тапа для мобильных - легко попасть пальцем! */
-  .tap-button {
-    width: 180px !important;
-    height: 180px !important;
-    font-size: 28px !important;
-    margin: 15px auto !important;
-    border: 5px solid #faf8f3 !important;
-    /* УБИРАЕМ ВСЕ ЗАДЕРЖКИ НА МОБИЛЬНЫХ */
-    transition: none !important;
-    -webkit-tap-highlight-color: transparent !important;
-    -webkit-touch-callout: none !important;
-    touch-action: manipulation !important;
-  }
-
-  .game-hint {
-    font-size: 15px !important;
-    margin-top: 10px !important;
-  }
-
-  .game-stats {
-    flex-direction: column !important;
-    gap: 10px !important;
-    font-size: 18px !important;
-  }
-
-  .game-stats > div {
-    margin: 0 !important;
-  }
-
-  /* Лидерборд на мобильных - ВКЛЮЧАЕМ СКРОЛЛ */
-  .leaderboard {
-    padding: 15px !important;
-    margin: 20px 0 !important;
-    max-height: 200px !important; /* Ограничиваем высоту */
-    overflow-y: auto !important; /* Включаем скролл для лидерборда */
-  }
-
-  .leaderboard h3 {
-    font-size: 20px !important;
-  }
-
-  .leaderboard-item {
-    padding: 10px 12px !important;
-    font-size: 14px !important;
-  }
-
-  .leaderboard-item .rank {
-    font-size: 18px !important;
-    min-width: 25px !important;
-  }
-
-  .leaderboard-item .player-name {
-    font-size: 15px !important;
-  }
-
-  .leaderboard-item .player-instagram {
-    font-size: 12px !important;
-  }
-
-  /* Мобильные стили для кликабельных Instagram ников */
-  .leaderboard-item .player-instagram.clickable-instagram {
-    font-size: 14px !important;
-    padding: 4px 8px !important;
-    border-radius: 4px !important;
-    background: rgba(76, 175, 80, 0.1) !important;
-    border: 1px solid rgba(76, 175, 80, 0.3) !important;
-    transition: all 0.2s ease !important;
-  }
-
-  .leaderboard-item .player-instagram.clickable-instagram:hover {
-    background: rgba(76, 175, 80, 0.2) !important;
-    border-color: rgba(76, 175, 80, 0.5) !important;
-  }
-
-  .leaderboard-item .player-instagram.clickable-instagram:active {
-    background: rgba(76, 175, 80, 0.3) !important;
-    transform: scale(0.98) !important;
-  }
-
-  .leaderboard-item .score {
-    font-size: 18px !important;
-  }
-
-  /* Кнопки миниигры */
-  .minigame-container button {
-    padding: 15px 30px !important;
-    font-size: 16px !important;
-    margin: 8px !important;
-  }
-
-  .game-final-score h1 {
-    font-size: 60px !important;
-  }
-
-  /* Закрывающая кнопка миниигры - делаем больше для мобильных */
-  .minigame-overlay .close-btn {
-    width: 50px !important;
-    height: 50px !important;
-    font-size: 32px !important;
-    line-height: 50px !important;
-  }
-}
 
 
 @keyframes float-emoji {
@@ -323,22 +164,23 @@ body {
 
 .header {
   text-align: center;
-  margin: 0; /* Убираем все отступы */
-  padding: 10px 0; /* Минимальный padding сверху и снизу */
-  position: fixed; /* Фиксируем хедер сверху */
-  top: 2%; /* Прижимаем к самому верху */
+  margin: 0;
+  padding: 1vh 0; /* Процентная высота viewport */
+  position: fixed;
+  top: 0;
   left: 0;
   right: 0;
-  z-index: 1000; /* Высокий z-index чтобы был поверх всего */
+  z-index: 1000;
   width: 100%;
-  height: 100px; /* Фиксированная высота */
+  height: 15vh; /* Процентная высота viewport */
+  min-height: 60px; /* Минимальная высота для очень маленьких экранов */
+  max-height: 15%; /* Максимальная высота для больших экранов */
   display: flex;
   align-items: center;
   justify-content: center;
-  /* Убираем фон полностью */
-  background: transparent;
-  /* Убираем backdrop-filter */
-  
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
 }
 
 /* Анимированный хедер */
@@ -394,19 +236,25 @@ body {
 
 /* Изображения */
 .header-image {
-  max-width: 150px;
-  max-height: 40px;
+  max-width: 20vw; /* Процентная ширина viewport */
+  max-height: 5vh; /* Процентная высота viewport */
+  min-width: 80px; /* Минимальный размер */
+  min-height: 20px; /* Минимальный размер */
   width: auto;
   height: auto;
   object-fit: contain;
-  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
+  filter: drop-shadow(0 0.5vh 1vh rgba(0, 0, 0, 0.3));
+  transition: all 0.3s ease;
 }
 
 .face-image {
-  max-width: 60px;
-  max-height: 60px;
+  max-width: 8vw; /* Процентная ширина viewport */
+  max-height: 8vh; /* Процентная высота viewport */
+  min-width: 35px; /* Минимальный размер */
+  min-height: 35px; /* Минимальный размер */
   border-radius: 50%;
   animation: faceShake 0.6s ease-in-out;
+  transition: all 0.3s ease;
 }
 
 /* Анимация лица */
@@ -439,33 +287,33 @@ body {
 
 .roulette-container {
   position: relative;
-  margin: clamp(10px, 3vw, 20px) 0 clamp(15px, 4vw, 25px) 0; /* Адаптивные отступы сверху и снизу */
+  margin: 2vh 0 3vh 0; /* Процентные отступы */
   display: flex;
   flex-direction: column;
   align-items: center;
   z-index: 10;
   width: 100%;
   max-width: 100%;
-  top: 40px;
+  top: 5vh; /* Процентный отступ сверху */
 }
 
 .roulette {
-  width: clamp(200px, 70vw, 350px); /* Улучшенная адаптивность */
-  height: clamp(200px, 70vw, 350px); /* Улучшенная адаптивность */
+  width: 60vw; /* Процентная ширина viewport */
+  height: 60vw; /* Квадратная форма */
+  max-width: 400px; /* Максимальный размер */
+  max-height: 400px; /* Максимальный размер */
+  min-width: 200px; /* Минимальный размер */
+  min-height: 200px; /* Минимальный размер */
   border-radius: 50%;
-  border: clamp(4px, 1.5vw, 10px) solid #12522D; /* Более тонкая граница на мобильных */
+  border: clamp(3px, 0.8vw, 10px) solid #12522D; /* Адаптивная толщина границы */
   position: relative;
   overflow: hidden;
-  box-shadow: 0 15px 40px rgba(18, 82, 45, 0.4), 
-              0 5px 15px rgba(0, 0, 0, 0.2),
-              inset 0 2px 8px rgba(255, 255, 255, 0.5);
+  box-shadow: 0 2vh 4vh rgba(18, 82, 45, 0.4), 
+              0 0.5vh 1.5vh rgba(0, 0, 0, 0.2),
+              inset 0 0.2vh 0.8vh rgba(255, 255, 255, 0.5);
   background: #faf8f3;
-  margin-bottom: -25px;
+  margin-bottom: -2.5vh; /* Процентный отступ снизу */
   z-index: 1;
-  /* Предотвращаем искажение на маленьких экранах */
-  min-width: 200px;
-  min-height: 200px;
-  max-width: 90vw; /* Ограничиваем максимальную ширину */
 }
 
 .wheel {
@@ -504,26 +352,32 @@ body {
 
 .prize-text {
   position: absolute;
-  font-size: clamp(8px, 2.5vw, 13px); /* Улучшенная адаптивность с большим минимальным размером */
+  font-size: clamp(9px, 2.5vw, 14px); /* Упрощенный адаптивный размер */
   font-weight: 900;
-  color: #ffffff;
+  color: #ffffff !important;
   text-shadow: 
-    2px 2px 8px rgba(0, 0, 0, 1),
-    -1px -1px 4px rgba(0, 0, 0, 0.9),
-    0px 0px 10px rgba(0, 0, 0, 0.8),
-    3px 3px 3px rgba(0, 0, 0, 0.7);
+    0.2vh 0.2vh 0.8vh rgba(0, 0, 0, 1),
+    -0.1vh -0.1vh 0.4vh rgba(0, 0, 0, 0.9),
+    0 0 1vh rgba(0, 0, 0, 0.8),
+    0.3vh 0.3vh 0.3vh rgba(0, 0, 0, 0.7),
+    0 0 1.5vh rgba(255, 255, 255, 0.3); /* Процентные тени */
   text-align: center;
   letter-spacing: 0.3px;
-  -webkit-text-stroke: clamp(0.4px, 0.2vw, 0.8px) rgba(0, 0, 0, 0.8); /* Усиленный stroke для лучшей читаемости */
+  -webkit-text-stroke: clamp(0.6px, 0.2vw, 1px) rgba(0, 0, 0, 0.9);
   text-transform: uppercase;
   z-index: 50;
   pointer-events: none;
-  width: clamp(75px, 20vw, 120px); /* Улучшенная адаптивная ширина */
-  line-height: 1.2; /* Улучшенный line-height */
+  width: 18vw; /* Процентная ширина viewport */
+  max-width: 120px; /* Максимальная ширина */
+  min-width: 70px; /* Минимальная ширина */
+  line-height: 1.2;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  filter: contrast(1.2) brightness(1.1);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 .center-circle {
@@ -531,18 +385,22 @@ body {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: clamp(50px, 12vw, 110px); /* Улучшенная адаптивность */
-  height: clamp(50px, 12vw, 110px); /* Улучшенная адаптивность */
+  width: 15vw; /* Процентная ширина viewport */
+  height: 15vw; /* Квадратная форма */
+  max-width: 120px; /* Максимальный размер */
+  max-height: 120px; /* Максимальный размер */
+  min-width: 50px; /* Минимальный размер */
+  min-height: 50px; /* Минимальный размер */
   background: linear-gradient(135deg, #faf8f3 0%, #f0ebe0 100%);
   border-radius: 50%;
-  border: clamp(2px, 0.8vw, 6px) solid #12522D; /* Более тонкая граница на мобильных */
+  border: clamp(2px, 0.6vw, 6px) solid #12522D; /* Адаптивная толщина границы */
   z-index: 150;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 6px 16px rgba(18, 82, 45, 0.4),
-              inset 0 2px 4px rgba(255, 255, 255, 0.8);
-  padding: clamp(3px, 1.5vw, 10px); /* Улучшенный адаптивный padding */
+  box-shadow: 0 0.6vh 1.6vh rgba(18, 82, 45, 0.4),
+              inset 0 0.2vh 0.4vh rgba(255, 255, 255, 0.8);
+  padding: clamp(3px, 1.2vw, 10px); /* Адаптивный padding */
 }
 
 .center-text {
@@ -560,46 +418,48 @@ body {
 .arrow {
   width: 0;
   height: 0;
-  border-left: clamp(12px, 3.5vw, 25px) solid transparent; /* Улучшенные адаптивные размеры */
-  border-right: clamp(12px, 3.5vw, 25px) solid transparent; /* Улучшенные адаптивные размеры */
-  border-top: clamp(24px, 7vw, 50px) solid #ffffff; /* Улучшенные адаптивные размеры */
+  border-left: clamp(12px, 3vw, 25px) solid transparent; /* Адаптивная ширина */
+  border-right: clamp(12px, 3vw, 25px) solid transparent; /* Адаптивная ширина */
+  border-top: clamp(24px, 6vw, 50px) solid #ffffff !important; /* Адаптивная высота */
   position: absolute;
-  top: 8px; /* Немного ближе к рулетке */
+  top: -0.5vh; /* Процентный отступ сверху */
   left: 50%;
   transform: translateX(-50%);
   z-index: 100;
-  filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.3));
+  filter: drop-shadow(0 0.4vh 1.2vh rgba(0, 0, 0, 0.3));
+  pointer-events: none;
+  -webkit-filter: drop-shadow(0 0.4vh 1.2vh rgba(0, 0, 0, 0.3));
 }
 
 .controls {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: clamp(10px, 3vw, 15px); /* Адаптивные отступы */
-  background: rgba(255, 255, 255, 0.9); /* Более плотный фон */
-  padding: clamp(15px, 4vw, 20px) clamp(10px, 3vw, 15px); /* Адаптивный padding */
-  border-radius: clamp(12px, 3vw, 15px); /* Адаптивный радиус */
-  box-shadow: 0 8px 24px rgba(18, 82, 45, 0.15);
-  border: clamp(1px, 0.5vw, 2px) solid rgba(18, 82, 45, 0.1); /* Адаптивная граница */
+  gap: 2vh; /* Процентные отступы */
+  background: rgba(255, 255, 255, 0.9);
+  padding: 2vh 3vw; /* Процентные отступы */
+  border-radius: 1.5vh; /* Процентный радиус */
+  box-shadow: 0 0.8vh 2.4vh rgba(18, 82, 45, 0.15);
+  border: clamp(1px, 0.3vw, 2px) solid rgba(18, 82, 45, 0.1);
   position: relative;
   z-index: 10;
-  width: 100%;
-  max-width: min(400px, 90vw); /* Ограничиваем максимальную ширину */
-  margin: clamp(10px, 3vw, 20px) auto 0 auto; 
-  top: 40px;/* Адаптивные отступы сверху и центрирование */
+  width: 90vw; /* Процентная ширина viewport */
+  max-width: 400px; /* Максимальная ширина */
+  margin: 2vh auto 0 auto; /* Процентные отступы */
+  top: 5vh; /* Процентный отступ сверху */
 }
 
 input {
-  padding: clamp(10px, 2.5vw, 12px) clamp(15px, 4vw, 20px); /* Адаптивный padding */
+  padding: 1.2vh 2vw; /* Процентные отступы */
   font-size: clamp(14px, 3.5vw, 16px); /* Адаптивный размер шрифта */
-  width: 100%; /* Занимает всю ширину контейнера */
+  width: 100%;
   max-width: 100%;
   text-align: center;
-  border: clamp(1px, 0.5vw, 2px) solid #12522D; /* Адаптивная граница */
-  border-radius: clamp(8px, 2vw, 12px); /* Адаптивный радиус */
+  border: clamp(1px, 0.3vw, 2px) solid #12522D;
+  border-radius: 1vh; /* Процентный радиус */
   background: #faf8f3;
-  box-shadow: 0 4px 12px rgba(18, 82, 45, 0.1),
-              inset 0 2px 4px rgba(255, 255, 255, 0.8);
+  box-shadow: 0 0.4vh 1.2vh rgba(18, 82, 45, 0.1),
+              inset 0 0.2vh 0.4vh rgba(255, 255, 255, 0.8);
   transition: all 0.3s ease;
   font-weight: 500;
   color: #333;
@@ -629,20 +489,20 @@ input:disabled::placeholder {
 }
 
 button {
-  padding: clamp(10px, 2.5vw, 12px) clamp(20px, 6vw, 30px); /* Адаптивный padding */
+  padding: 1.2vh 3vw; /* Процентные отступы */
   background: linear-gradient(135deg, #12522D 0%, #1a6d3f 100%);
   color: #faf8f3;
   border: none;
-  border-radius: clamp(8px, 2vw, 12px); /* Адаптивный радиус */
-  font-size: clamp(14px, 3.5vw, 16px); /* Адаптивный размер шрифта */
+  border-radius: 1vh; /* Процентный радиус */
+  font-size: clamp(14px, 3.5vw, 16px);
   font-weight: 700;
   cursor: pointer;
   transition: all 0.3s ease;
-  box-shadow: 0 4px 15px rgba(18, 82, 45, 0.4);
+  box-shadow: 0 0.4vh 1.5vh rgba(18, 82, 45, 0.4);
   letter-spacing: 0.5px;
   position: relative;
   overflow: hidden;
-  width: 100%; /* Занимает всю ширину контейнера */
+  width: 100%;
   max-width: 100%;
 }
 
@@ -859,142 +719,8 @@ button:disabled {
   letter-spacing: 0.5px;
 }
 
-/* Планшеты */
-@media (min-width: 769px) and (max-width: 1024px) {
-  .roulette {
-    width: clamp(300px, 50vw, 400px);
-    height: clamp(300px, 50vw, 400px);
-  }
-  
-  .center-circle {
-    width: clamp(80px, 12vw, 100px);
-    height: clamp(80px, 12vw, 100px);
-  }
-  
-  .prize-text {
-    font-size: clamp(10px, 2vw, 12px);
-    width: clamp(90px, 18vw, 110px);
-  }
-  
-  .header {
-    height: 140px;
-  }
-  
-  .header-image {
-    max-width: 160px;
-    max-height: 45px;
-  }
-  
-  .face-image {
-    max-width: 60px;
-    max-height: 60px;
-  }
-  
-  /* Оптимизация анимации хедера на планшетах */
-  .animated-header.animate .top-text {
-    transform: translateY(-20px);
-  }
 
-  .animated-header.animate .bottom-text {
-    transform: translateY(20px);
-  }
-}
 
-/* Большие экраны */
-@media (min-width: 1025px) {
-  .roulette {
-    width: clamp(350px, 45vw, 450px);
-    height: clamp(350px, 45vw, 450px);
-  }
-  
-  .center-circle {
-    width: clamp(100px, 10vw, 120px);
-    height: clamp(100px, 10vw, 120px);
-  }
-  
-  .prize-text {
-    font-size: clamp(12px, 1.5vw, 15px);
-    width: clamp(100px, 15vw, 130px);
-  }
-  
-  .header {
-    height: 150px;
-   
-  }
-  
-  .header-image {
-    max-width: 180px;
-    max-height: 50px;
-  }
-  
-  .face-image {
-    max-width: 60px;
-    max-height: 60px;
-  }
-  
-  /* Оптимизация анимации хедера на больших экранах */
-  .animated-header.animate .top-text {
-    transform: translateY(-10px);
-  }
-
-  .animated-header.animate .bottom-text {
-    transform: translateY(10px);
-  }
-}
-
-@media (max-width: 600px) {
-  .header {
-    margin-bottom: 15px;
-  }
-  
-  .header h1 {
-    font-size: 24px;
-  }
-  
-  input {
-    width: min(280px, 90%);
-  }
-  
-  button {
-    padding: 12px 25px;
-    font-size: 16px;
-  }
-  
-  .controls {
-    padding: 15px 20px;
-  }
-  
-  /* Модальное окно приза на мобильных */
-  .prize-modal-content {
-    padding: 30px 20px;
-    width: 95%;
-  }
-  
-  .prize-modal-content h2 {
-    font-size: 32px;
-  }
-  
-  .prize-emoji {
-    font-size: 80px;
-  }
-  
-  .prize-modal-content h3 {
-    font-size: 24px;
-  }
-  
-  .prize-description {
-    font-size: 16px;
-  }
-  
-  .hint-text {
-    font-size: 18px;
-  }
-  
-  .prize-close-btn {
-    padding: 12px 30px;
-    font-size: 18px;
-  }
-}
 
 /* Модальное окно приза */
 .prize-modal {
@@ -1749,493 +1475,7 @@ button:disabled {
   }
 }
 
-/* Мобильная версия миниигры */
-@media (max-width: 600px) {
-  .minigame-container {
-    padding: 30px 20px;
-  }
-  
-  .minigame-container h2 {
-    font-size: 32px;
-  }
-  
-  .minigame-container h3 {
-    font-size: 24px;
-  }
-  
-  .minigame-container p {
-    font-size: 16px;
-  }
-  
-  .minigame-emoji {
-    font-size: 80px;
-  }
-  
-  .fishing-bar {
-    height: 300px;
-  }
-  
-  .tap-button {
-    width: 150px;
-    height: 150px;
-    font-size: 24px;
-  }
-  
-  /* Админ-панель на мобильных */
-  .admin-container {
-    padding: 25px 15px;
-    max-width: 95%;
-  }
-  
-  .admin-container h2 {
-    font-size: 28px;
-  }
-  
-  .admin-stats {
-    grid-template-columns: 1fr;
-    gap: 15px;
-  }
-  
-  .stat-value {
-    font-size: 32px;
-  }
-  
-  .stat-label {
-    font-size: 12px;
-  }
-  
-  .admin-btn {
-    padding: 12px 20px;
-    font-size: 16px;
-  }
-  
-  .admin-log {
-    font-size: 12px;
-    max-height: 150px;
-  }
-  
-  .admin-close-btn {
-    padding: 12px 30px;
-    font-size: 16px;
-  }
-  
-  .game-final-score h1 {
-    font-size: 60px;
-  }
-  
-  /* Лидерборд на мобильных */
-  .leaderboard {
-    margin: 20px 0;
-  }
-  
-  .leaderboard h3 {
-    font-size: 20px;
-    margin-bottom: 15px;
-  }
-  
-  .leaderboard-item {
-    padding: 8px 12px;
-    font-size: 14px;
-  }
-  
-  .leaderboard-item .rank {
-    font-size: 16px;
-  }
-  
-  .leaderboard-item .score {
-    font-size: 16px;
-  }
-
-  /* Дополнительная оптимизация для мобильных устройств */
-  body {
-    padding: clamp(90px, 22vw, 110px) clamp(8px, 2vw, 15px) clamp(15px, 3vw, 20px) clamp(8px, 2vw, 15px) !important; /* Адаптивные отступы с учетом высоты хедера */
-    /* ПОЛНОСТЬЮ БЛОКИРУЕМ СКРОЛЛ И УБИРАЕМ ЛИШНЕЕ ПРОСТРАНСТВО */
-    height: 100vh !important;
-    width: 100vw !important;
-    max-height: 100vh !important;
-    max-width: 100vw !important;
-    overflow: hidden !important;
-    position: fixed !important;
-    top: 0 !important;
-    left: 0 !important;
-    justify-content: flex-start !important;
-  }
-
-  .header {
-    margin: 0 !important;
-    padding: 5px 0 !important;
-    
-    height: clamp(70px, 15vw, 80px) !important; /* Адаптивная высота на мобильных */
-  }
-
-  /* Мобильные стили для анимированного хедера */
-  .header-image {
-    max-width: clamp(100px, 25vw, 120px) !important;
-    max-height: clamp(30px, 8vw, 35px) !important;
-  }
-
-  .face-image {
-    max-width: clamp(35px, 10vw, 70px) !important;
-    max-height: clamp(35px, 10vw, 70px) !important;
-  }
-
-  /* Меньшее расхождение на мобильных */
-  .animated-header.animate .top-text {
-    transform: translateY(-15px) !important;
-  }
-
-  .animated-header.animate .bottom-text {
-    transform: translateY(15px) !important;
-  }
-  
-  /* Оптимизация анимации хедера на мобильных */
-  .text-layer {
-    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1) !important;
-  }
-  
-  .face-layer {
-    transition: all 1s cubic-bezier(0.4, 0, 0.2, 1) !important;
-  }
-
-  /* Рулетка на мобильных - компактнее */
-  .roulette-container {
-    width: 90vw !important;
-    max-width: 320px !important;
-    margin: 10px 0 !important;
-  }
-
-  /* Стили для экранов больше 600px */
-  @media (min-width: 601px) {
-    .wheel {
-      width: clamp(200px, 50vw, 250px) !important;
-      height: clamp(200px, 50vw, 250px) !important;
-    }
-
-    .center-circle {
-      width: clamp(50px, 12vw, 60px) !important;
-      height: clamp(50px, 12vw, 60px) !important;
-    }
-
-    .center-logo {
-      width: 40px !important;
-    }
-
-    .arrow {
-      width: 0 !important;
-      height: 0 !important;
-      border-left: clamp(12px, 3vw, 18px) solid transparent !important;
-      border-right: clamp(12px, 3vw, 18px) solid transparent !important;
-      border-top: clamp(25px, 6vw, 35px) solid #12522D !important;
-      top: -40px !important;
-    }
-  }
 
 
-  /* Контролы на мобильных */
-  .controls {
-    width: 90% !important;
-    padding: 15px 10px !important;
-    gap: 10px !important;
-    margin: clamp(8px, 2vw, 15px) auto 0 auto !important; /* Адаптивные отступы на мобильных */
-  }
 
-  input {
-    width: 100% !important;
-    max-width: 100% !important;
-    padding: 10px 15px !important;
-    font-size: 14px !important; /* Уменьшаем размер */
-  }
 
-  button#spinBtn {
-    width: 100% !important;
-    padding: 10px 20px !important;
-    font-size: 16px !important;
-  }
-
-  .result {
-    font-size: 16px !important;
-    padding: 12px !important;
-  }
-
-  /* Оптимизация анимаций на мобильных */
-  .floating-emoji {
-    will-change: transform !important;
-    /* Упрощаем анимацию для производительности */
-    animation-timing-function: linear !important;
-  }
-
-  /* Модальные окна на мобильных */
-  .prize-modal-content {
-    width: 90% !important;
-    max-width: 90% !important;
-    padding: 25px 20px !important;
-  }
-
-  .prize-modal-content h2 {
-    font-size: 28px !important;
-  }
-
-  .prize-emoji {
-    font-size: 60px !important;
-  }
-
-  .prize-modal-content h3 {
-    font-size: 20px !important;
-  }
-
-  .prize-description {
-    font-size: 15px !important;
-  }
-
-  /* Админ-панель на мобильных */
-  .admin-container {
-    width: 90% !important;
-    max-width: 90% !important;
-    padding: 20px 15px !important;
-  }
-
-  .admin-stats {
-    flex-direction: column !important;
-    gap: 10px !important;
-  }
-
-  .stat-card {
-    width: 100% !important;
-  }
-
-  .admin-actions {
-    flex-direction: column !important;
-    width: 100% !important;
-  }
-
-  .admin-btn {
-    width: 100% !important;
-    padding: 12px 20px !important;
-    font-size: 14px !important;
-  }
-}
-
-/* Очень маленькие экраны (Pixel 4, iPhone SE и т.д.) */
-@media (max-width: 400px) {
-  .header {
-    height: 70px !important;
-    margin: 0 !important;
-    padding: 3px 0 !important;
-  }
-
-  .header-image {
-    max-width: 100px !important;
-    max-height: 30px !important;
-  }
-
-  .face-image {
-    max-width: 60px !important;
-    max-height: 60px !important;
-  }
-
-  .roulette-container {
-    width: 95vw !important;
-    max-width: clamp(250px, 80vw, 280px) !important;
-    margin: clamp(5px, 2vw, 10px) 0 !important; /* Адаптивные отступы */
-  }
-
-  .wheel {
-    width: clamp(160px, 70vw, 180px) !important;
-    height: clamp(160px, 70vw, 180px) !important;
-  }
-
-  .center-circle {
-    width: clamp(40px, 10vw, 45px) !important;
-    height: clamp(40px, 10vw, 45px) !important;
-  }
-
-  .center-logo {
-    width: clamp(30px, 8vw, 35px) !important;
-  }
-
-  .prize-text {
-    font-size: clamp(9px, 2.5vw, 11px) !important; /* Увеличиваем минимальный размер */
-    width: clamp(60px, 18vw, 70px) !important; /* Увеличиваем ширину */
-    line-height: 1.2 !important; /* Улучшаем читаемость */
-    font-weight: 900 !important; /* Делаем текст жирнее */
-    text-shadow: 
-      1px 1px 4px rgba(0, 0, 0, 1),
-      -1px -1px 3px rgba(0, 0, 0, 0.9),
-      0px 0px 8px rgba(0, 0, 0, 0.8),
-      2px 2px 3px rgba(0, 0, 0, 0.7) !important; /* Усиливаем тень */
-    -webkit-text-stroke: 0.5px rgba(0, 0, 0, 0.9) !important; /* Усиливаем обводку */
-  }
-
-  .arrow {
-    border-left: clamp(8px, 2.5vw, 10px) solid transparent !important;
-    border-right: clamp(8px, 2.5vw, 10px) solid transparent !important;
-    border-top: clamp(16px, 5vw, 20px) solid #12522D !important;
-    top: -25px !important;
-  }
-
-  .controls {
-    padding: clamp(8px, 2vw, 10px) clamp(6px, 1.5vw, 8px) !important;
-    gap: clamp(6px, 1.5vw, 8px) !important;
-  }
-
-  input {
-    padding: clamp(6px, 1.5vw, 8px) clamp(8px, 2vw, 12px) !important;
-    font-size: clamp(11px, 2.5vw, 12px) !important;
-  }
-
-  button#spinBtn {
-    padding: clamp(6px, 1.5vw, 8px) clamp(12px, 3vw, 16px) !important;
-    font-size: clamp(12px, 3vw, 14px) !important;
-  }
-
-  .result {
-    font-size: clamp(12px, 3vw, 14px) !important;
-    padding: clamp(6px, 1.5vw, 8px) !important;
-  }
-
-  /* Эмоджи на очень маленьких экранах */
-  .floating-emoji {
-    font-size: clamp(30px, 8vw, 35px) !important;
-  }
-
-  .floating-emoji.shrimp {
-    font-size: clamp(35px, 9vw, 40px) !important;
-  }
-
-  .floating-emoji.shrimp::before {
-    width: clamp(100px, 25vw, 120px) !important;
-    height: clamp(100px, 25vw, 120px) !important;
-  }
-}
-
-/* Очень короткие экраны (Pixel 4 в портрете) */
-@media (max-height: 700px) {
-  body {
-    padding: clamp(80px, 18vw, 90px) clamp(6px, 1.5vw, 8px) clamp(10px, 2vw, 15px) clamp(6px, 1.5vw, 8px) !important;
-  }
-
-  .header {
-    height: clamp(60px, 12vw, 70px) !important;
-    margin-bottom: 3px !important;
-  }
-
-  .roulette-container {
-    margin: clamp(5px, 2vw, 8px) 0 !important; /* Адаптивные отступы */
-  }
-
-  .controls {
-    padding: clamp(6px, 1.5vw, 8px) clamp(4px, 1vw, 6px) !important;
-    gap: clamp(4px, 1vw, 6px) !important;
-    margin: clamp(5px, 2vw, 10px) auto 0 auto !important; /* Адаптивные отступы */
-  }
-
-  .leaderboard {
-    margin: clamp(8px, 2vw, 10px) 0 !important;
-    padding: clamp(8px, 2vw, 10px) !important;
-    max-height: clamp(120px, 20vh, 150px) !important;
-  }
-
-  .leaderboard h3 {
-    font-size: clamp(14px, 3vw, 16px) !important;
-    margin-bottom: clamp(6px, 1.5vw, 8px) !important;
-  }
-
-  .leaderboard-item {
-    padding: clamp(4px, 1vw, 6px) clamp(6px, 1.5vw, 8px) !important;
-    font-size: clamp(10px, 2.5vw, 12px) !important;
-  }
-
-  .leaderboard-item .rank {
-    font-size: clamp(12px, 3vw, 14px) !important;
-  }
-
-  .leaderboard-item .score {
-    font-size: clamp(12px, 3vw, 14px) !important;
-  }
-}
-
-/* Дополнительные стили для экранов меньше 600px */
-@media (max-width: 600px) {
-  .roulette-container {
-    display: flex !important;
-    justify-content: center !important;
-    align-items: center !important;
-    width: 100% !important;
-    max-width: 100% !important;
-    margin: 10px auto !important;
-  }
-
-  .roulette {
-    width: clamp(220px, 75vw, 250px) !important; /* Увеличиваем размер для лучшей читаемости */
-    height: clamp(220px, 75vw, 250px) !important;
-    margin: 0 auto !important;
-    position: relative !important;
-  }
-
-  .wheel {
-    width: 100% !important; /* Занимает всю ширину рулетки */
-    height: 100% !important; /* Занимает всю высоту рулетки */
-    position: relative !important;
-  }
-
-  .center-circle {
-    width: clamp(45px, 12vw, 55px) !important; /* Адаптивный размер */
-    height: clamp(45px, 12vw, 55px) !important;
-    position: absolute !important;
-    top: 50% !important;
-    left: 50% !important;
-    transform: translate(-50%, -50%) !important;
-  }
-
-  .center-logo {
-    width: clamp(25px, 8vw, 35px) !important; /* Адаптивный размер логотипа */
-    height: clamp(25px, 8vw, 35px) !important;
-  }
-
-  .prize-text {
-    font-size: clamp(10px, 2.8vw, 12px) !important; /* Увеличиваем минимальный размер */
-    width: clamp(70px, 20vw, 80px) !important; /* Увеличиваем ширину */
-    line-height: 1.2 !important; /* Улучшаем читаемость */
-    font-weight: 900 !important; /* Делаем текст жирнее */
-    text-shadow: 
-      1px 1px 3px rgba(0, 0, 0, 1),
-      -1px -1px 2px rgba(0, 0, 0, 0.9),
-      0px 0px 6px rgba(0, 0, 0, 0.8),
-      2px 2px 2px rgba(0, 0, 0, 0.7) !important; /* Усиливаем тень */
-  }
-
-  .arrow {
-    width: 0 !important;
-    height: 0 !important;
-    border-left: clamp(10px, 3vw, 14px) solid transparent !important; /* Адаптивные размеры */
-    border-right: clamp(10px, 3vw, 14px) solid transparent !important;
-    border-top: clamp(20px, 6vw, 28px) solid #12522D !important;
-    position: absolute !important;
-    top: 8px !important; /* Немного ближе к рулетке */
-    left: 50% !important;
-    transform: translateX(-50%) !important;
-  }
-}
-
-/* Мобильные стили для промо-секции */
-@media (max-width: 600px) {
-  .promo-section {
-    padding: clamp(15px, 4vw, 20px) clamp(12px, 3vw, 15px) !important;
-    gap: clamp(12px, 3vw, 18px) !important;
-    margin: clamp(10px, 3vw, 20px) auto 0 auto !important; /* Адаптивные отступы на мобильных */
-  }
-  
-  .promo-title {
-    font-size: clamp(18px, 4.5vw, 24px) !important;
-  }
-  
-  .instagram-button {
-    padding: clamp(10px, 2.5vw, 14px) clamp(16px, 4vw, 24px) !important;
-    font-size: clamp(13px, 3vw, 16px) !important;
-  }
-  
-  .instagram-icon {
-    width: clamp(18px, 4.5vw, 22px) !important;
-    height: clamp(18px, 4.5vw, 22px) !important;
-  }
-}
