@@ -423,8 +423,8 @@ body {
 }
 
 .roulette {
-  width: clamp(200px, 50vw, 300px); /* Адаптивный размер с ограничениями */
-  height: clamp(200px, 50vw, 300px); /* Адаптивный размер с ограничениями */
+  width: clamp(250px, 60vw, 350px); /* Увеличиваем размер для отступов по бокам */
+  height: clamp(250px, 60vw, 350px); /* Увеличиваем размер для отступов по бокам */
   border-radius: 50%;
   border: clamp(6px, 2vw, 10px) solid #12522D; /* Адаптивная граница */
   position: relative;
@@ -436,8 +436,8 @@ body {
   margin-bottom: -25px;
   z-index: 1;
   /* Предотвращаем искажение на маленьких экранах */
-  min-width: 200px;
-  min-height: 200px;
+  min-width: 250px;
+  min-height: 250px;
 }
 
 .wheel {
@@ -666,8 +666,8 @@ button:disabled {
 /* Планшеты */
 @media (min-width: 769px) and (max-width: 1024px) {
   .roulette {
-    width: clamp(250px, 40vw, 350px);
-    height: clamp(250px, 40vw, 350px);
+    width: clamp(300px, 50vw, 400px);
+    height: clamp(300px, 50vw, 400px);
   }
   
   .center-circle {
@@ -707,8 +707,8 @@ button:disabled {
 /* Большие экраны */
 @media (min-width: 1025px) {
   .roulette {
-    width: clamp(300px, 35vw, 400px);
-    height: clamp(300px, 35vw, 400px);
+    width: clamp(350px, 45vw, 450px);
+    height: clamp(350px, 45vw, 450px);
   }
   
   .center-circle {
@@ -755,8 +755,8 @@ button:disabled {
   }
   
   .roulette {
-    width: 350px;
-    height: 350px;
+    width: 300px;
+    height: 300px;
   }
   
   .center-circle {
@@ -1620,13 +1620,13 @@ button:disabled {
   /* Рулетка на мобильных - компактнее */
   .roulette-container {
     width: 90vw !important;
-    max-width: 250px !important;
+    max-width: 320px !important;
     margin: 10px 0 !important;
   }
 
   .wheel {
-    width: clamp(180px, 45vw, 200px) !important;
-    height: clamp(180px, 45vw, 200px) !important;
+    width: clamp(200px, 50vw, 250px) !important;
+    height: clamp(200px, 50vw, 250px) !important;
   }
 
   .center-circle {
