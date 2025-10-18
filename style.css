@@ -585,7 +585,8 @@ body {
   z-index: 10;
   width: 100%;
   max-width: min(400px, 90vw); /* Ограничиваем максимальную ширину */
-  margin: clamp(10px, 3vw, 20px) auto 0 auto; /* Адаптивные отступы сверху и центрирование */
+  margin: clamp(10px, 3vw, 20px) auto 0 auto; 
+  top: 40px;/* Адаптивные отступы сверху и центрирование */
 }
 
 input {
