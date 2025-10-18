@@ -100,6 +100,60 @@ function startHeaderAnimation() {
   }
 }
 
+// Функция для обновления позиций текста при изменении размера окна
+function updateTextPositions() {
+  const textElements = document.querySelectorAll('.prize-text');
+  const numSegments = rolls.length;
+  const degPerSeg = 360 / numSegments;
+  
+  textElements.forEach((textDiv, i) => {
+    const angle = (i * degPerSeg) + (degPerSeg / 2);
+    
+    // Адаптивное расстояние от центра в зависимости от размера экрана
+    const screenWidth = window.innerWidth;
+    let distanceFromCenter;
+    if (screenWidth < 400) {
+      distanceFromCenter = '100px';
+    } else if (screenWidth < 600) {
+      distanceFromCenter = '120px';
+    } else if (screenWidth < 768) {
+      distanceFromCenter = '140px';
+    } else {
+      distanceFromCenter = '150px';
+    }
+    
+    textDiv.style.transform = `rotate(${angle}deg) translate(-50%, -${distanceFromCenter})`;
+    
+    // Также обновляем разбиение текста
+    const text = rolls[i];
+    let maxLength;
+    if (screenWidth < 400) {
+      maxLength = 8;
+    } else if (screenWidth < 600) {
+      maxLength = 10;
+    } else if (screenWidth < 768) {
+      maxLength = 12;
+    } else {
+      maxLength = 12;
+    }
+    
+    if (text.length > maxLength) {
+      const words = text.split(' ');
+      if (words.length > 1) {
+        textDiv.innerHTML = words.join('<br>');
+      } else {
+        const mid = Math.ceil(text.length / 2);
+        textDiv.innerHTML = text.substring(0, mid) + '<br>' + text.substring(mid);
+      }
+    } else {
+      textDiv.textContent = text;
+    }
+  });
+}
+
+// Обработчик изменения размера окна
+window.addEventListener('resize', updateTextPositions);
+
 // Запускаем анимацию при загрузке страницы
 document.addEventListener('DOMContentLoaded', function() {
   startHeaderAnimation();
@@ -232,22 +286,51 @@ function generateSegments() {
     // Угол для текста (центр сегмента)
     const angle = (i * degPerSeg) + (degPerSeg / 2);
     
-    // Позиционируем текст
+    // Позиционируем текст с адаптивным расстоянием
     textDiv.style.position = 'absolute';
     textDiv.style.left = '50%';
     textDiv.style.top = '50%';
-    textDiv.style.transform = `rotate(${angle}deg) translate(-50%, -150px)`;
+    
+    // Адаптивное расстояние от центра в зависимости от размера экрана
+    const screenWidth = window.innerWidth;
+    let distanceFromCenter;
+    if (screenWidth < 400) {
+      distanceFromCenter = '100px'; // Ближе к центру для очень маленьких экранов
+    } else if (screenWidth < 600) {
+      distanceFromCenter = '120px'; // Ближе к центру для маленьких экранов
+    } else if (screenWidth < 768) {
+      distanceFromCenter = '140px'; // Среднее расстояние для планшетов
+    } else {
+      distanceFromCenter = '150px'; // Стандартное расстояние для больших экранов
+    }
+    
+    textDiv.style.transform = `rotate(${angle}deg) translate(-50%, -${distanceFromCenter})`;
     textDiv.style.transformOrigin = '0 0';
     
     // Форматируем текст (разбиваем длинные названия)
     const text = rolls[i];
-    if (text.length > 12) {
+    
+    // Адаптивная длина для разбиения в зависимости от размера экрана
+    let maxLength;
+    if (screenWidth < 400) {
+      maxLength = 8; // Более агрессивное разбиение для очень маленьких экранов
+    } else if (screenWidth < 600) {
+      maxLength = 10; // Более агрессивное разбиение для маленьких экранов
+    } else if (screenWidth < 768) {
+      maxLength = 12; // Стандартное разбиение для планшетов
+    } else {
+      maxLength = 12; // Стандартное разбиение для больших экранов
+    }
+    
+    if (text.length > maxLength) {
       // Разбиваем на 2 строки для длинных названий
       const words = text.split(' ');
       if (words.length > 1) {
         textDiv.innerHTML = words.join('<br>');
       } else {
-        textDiv.textContent = text;
+        // Если это одно слово, разбиваем по символам
+        const mid = Math.ceil(text.length / 2);
+        textDiv.innerHTML = text.substring(0, mid) + '<br>' + text.substring(mid);
       }
     } else {
       textDiv.textContent = text;
@@ -659,13 +742,13 @@ async function endGame() {
     endTitle.textContent = '🏆 Неймовірно!';
     endEmoji.textContent = '🦐✨';
   } else if (gameState.score >= 300) {
-    endTitle.textContent = '🎉 Отлично!';
+    endTitle.textContent = '🎉 Чудово!';
     endEmoji.textContent = '🦐';
   } else if (gameState.score >= 150) {
-    endTitle.textContent = '😊 Хорошо!';
+    endTitle.textContent = '😊 Добре!';
     endEmoji.textContent = '🐟';
   } else {
-    endTitle.textContent = '😅 Попробуй еще!';
+    endTitle.textContent = '😅 Спробуй ще!';
     endEmoji.textContent = '🦀';
   }
   
@@ -801,12 +884,12 @@ function createFloatingEmojis() {
     
     emojiDiv.style.left = `${randomX}vw`;
     emojiDiv.style.top = '100vh'; // Начинаем снизу экрана
-    emojiDiv.style.animationDelay = `-${i * 2}s`; // Фиксированные задержки
+    emojiDiv.style.animationDelay = `-${i * 3}s`; // Увеличенные задержки для более плавного появления
     
-    // Фиксированные длительности анимации
+    // Медленные длительности анимации для плавного движения
     const duration = (emoji === '🦐') 
-      ? 25  // Фиксированная длительность для креветок
-      : 20;  // Фиксированная длительность для обычных
+      ? 45  // Очень медленно для креветок
+      : 35;  // Медленно для обычных эмоджи
     
     emojiDiv.style.animationDuration = `${duration}s`;
     
