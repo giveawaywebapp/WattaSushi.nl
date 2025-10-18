@@ -862,7 +862,7 @@ function createFloatingEmojis() {
           
   const isMobile = window.innerWidth <= 768;
   const isTablet = window.innerWidth <= 1024;
-  const emojiCount = isMobile ? 10 : (isTablet ? 14 : 18); // Больше эмоджи для лучшего эффекта
+  const emojiCount = isMobile ? 14 : (isTablet ? 18 : 22); // Больше эмоджи для лучшего эффекта
 
   // Создаем контейнер для эмоджи, чтобы они не влияли на размер страницы
   let emojiContainer = document.getElementById('emoji-container');
@@ -1200,6 +1200,205 @@ async function disableAdminPermanently() {
   }
   
   document.getElementById('insta').value = '';
+}
+
+// --- Стресс-тест ---
+let stressTestState = {
+  isRunning: false,
+  totalUsers: 100,
+  completed: 0,
+  success: 0,
+  errors: 0,
+  startTime: null,
+  requests: []
+};
+
+async function startStressTest() {
+  if (stressTestState.isRunning) {
+    alert('⚠️ Стресс-тест уже запущен!');
+    return;
+  }
+
+  if (!confirm('🚀 Запустить стресс-тест с 100 одновременными пользователями?\n\nЭто создаст нагрузку на сервер!')) {
+    return;
+  }
+
+  // Инициализация
+  stressTestState = {
+    isRunning: true,
+    totalUsers: 100,
+    completed: 0,
+    success: 0,
+    errors: 0,
+    startTime: Date.now(),
+    requests: []
+  };
+
+  // Показываем секцию стресс-теста
+  const stressSection = document.getElementById('stressTestSection');
+  stressSection.style.display = 'block';
+
+  // Отключаем кнопку запуска
+  const stressBtn = document.querySelector('.admin-btn.stress');
+  stressBtn.disabled = true;
+  stressBtn.textContent = '🔄 Тест запущен...';
+
+  // Обновляем UI
+  updateStressTestUI();
+
+  // Логируем начало теста
+  addAdminLog('🚀 Начало стресс-теста: 100 пользователей', 'info');
+
+  // Запускаем симуляцию пользователей
+  await simulateMultipleUsers();
+
+  // Завершение теста
+  completeStressTest();
+}
+
+async function simulateMultipleUsers() {
+  const promises = [];
+  
+  for (let i = 0; i < stressTestState.totalUsers; i++) {
+    // Создаем случайную задержку для более реалистичной симуляции
+    const delay = Math.random() * 1000; // 0-1 секунда
+    
+    promises.push(
+      new Promise(resolve => {
+        setTimeout(async () => {
+          await simulateSingleUser(i + 1);
+          resolve();
+        }, delay);
+      })
+    );
+  }
+
+  // Ждем завершения всех запросов
+  await Promise.allSettled(promises);
+}
+
+async function simulateSingleUser(userId) {
+  try {
+    // Генерируем уникальный fingerprint для каждого пользователя
+    const fakeFingerprint = `stress_test_${userId}_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+    const fakeInstagram = `test_user_${userId}`;
+
+    // Симулируем проверку
+    const checkResponse = await fetch(`${API_URL}/check`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ 
+        fingerprint: fakeFingerprint,
+        instagram: fakeInstagram
+      })
+    });
+
+    if (checkResponse.ok) {
+      const checkResult = await checkResponse.json();
+      
+      if (checkResult.allowed) {
+        // Симулируем сохранение результата
+        const saveResponse = await fetch(`${API_URL}/save`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            fingerprint: fakeFingerprint,
+            instagram: fakeInstagram,
+            prize: 'Test Prize'
+          })
+        });
+
+        if (saveResponse.ok) {
+          stressTestState.success++;
+          addAdminLog(`✅ Пользователь ${userId}: успешно`, 'success');
+        } else {
+          stressTestState.errors++;
+          addAdminLog(`❌ Пользователь ${userId}: ошибка сохранения`, 'error');
+        }
+      } else {
+        stressTestState.success++; // Уже участвовал - это тоже успех
+        addAdminLog(`ℹ️ Пользователь ${userId}: уже участвовал`, 'info');
+      }
+    } else {
+      stressTestState.errors++;
+      addAdminLog(`❌ Пользователь ${userId}: ошибка проверки (${checkResponse.status})`, 'error');
+    }
+  } catch (error) {
+    stressTestState.errors++;
+    addAdminLog(`❌ Пользователь ${userId}: исключение - ${error.message}`, 'error');
+  }
+
+  stressTestState.completed++;
+  updateStressTestUI();
+}
+
+function updateStressTestUI() {
+  const progress = (stressTestState.completed / stressTestState.totalUsers) * 100;
+  const elapsed = Math.round((Date.now() - stressTestState.startTime) / 1000);
+
+  // Обновляем прогресс-бар
+  document.getElementById('stressProgressFill').style.width = `${progress}%`;
+  document.getElementById('stressProgressText').textContent = `${stressTestState.completed}/${stressTestState.totalUsers}`;
+
+  // Обновляем статистику
+  document.getElementById('stressSuccess').textContent = stressTestState.success;
+  document.getElementById('stressErrors').textContent = stressTestState.errors;
+  document.getElementById('stressTime').textContent = `${elapsed}с`;
+}
+
+function completeStressTest() {
+  stressTestState.isRunning = false;
+  const totalTime = Math.round((Date.now() - stressTestState.startTime) / 1000);
+  const successRate = Math.round((stressTestState.success / stressTestState.totalUsers) * 100);
+
+  // Восстанавливаем кнопку
+  const stressBtn = document.querySelector('.admin-btn.stress');
+  stressBtn.disabled = false;
+  stressBtn.textContent = '🚀 СТРЕСС-ТЕСТ (100 пользователей)';
+
+  // Логируем результаты
+  addAdminLog(`🏁 Стресс-тест завершен!`, 'info');
+  addAdminLog(`📊 Результаты:`, 'info');
+  addAdminLog(`   ✅ Успешно: ${stressTestState.success}/${stressTestState.totalUsers} (${successRate}%)`, 'success');
+  addAdminLog(`   ❌ Ошибки: ${stressTestState.errors}`, stressTestState.errors > 0 ? 'error' : 'info');
+  addAdminLog(`   ⏱️ Время: ${totalTime} секунд`, 'info');
+  addAdminLog(`   📈 RPS: ${Math.round(stressTestState.totalUsers / totalTime)} запросов/сек`, 'info');
+
+  // Показываем итоговое сообщение
+  setTimeout(() => {
+    alert(`🏁 Стресс-тест завершен!\n\n` +
+          `✅ Успешно: ${stressTestState.success}/${stressTestState.totalUsers} (${successRate}%)\n` +
+          `❌ Ошибки: ${stressTestState.errors}\n` +
+          `⏱️ Время: ${totalTime} секунд\n` +
+          `📈 RPS: ${Math.round(stressTestState.totalUsers / totalTime)} запросов/сек`);
+  }, 500);
+}
+
+function stopStressTest() {
+  if (!stressTestState.isRunning) {
+    alert('⚠️ Стресс-тест не запущен!');
+    return;
+  }
+
+  if (!confirm('⏹️ Остановить стресс-тест?')) {
+    return;
+  }
+
+  stressTestState.isRunning = false;
+  
+  // Восстанавливаем кнопку
+  const stressBtn = document.querySelector('.admin-btn.stress');
+  stressBtn.disabled = false;
+  stressBtn.textContent = '🚀 СТРЕСС-ТЕСТ (100 пользователей)';
+
+  // Скрываем секцию
+  document.getElementById('stressTestSection').style.display = 'none';
+
+  addAdminLog(`⏹️ Стресс-тест остановлен пользователем`, 'warning');
+  addAdminLog(`📊 Частичные результаты:`, 'info');
+  addAdminLog(`   ✅ Успешно: ${stressTestState.success}`, 'success');
+  addAdminLog(`   ❌ Ошибки: ${stressTestState.errors}`, stressTestState.errors > 0 ? 'error' : 'info');
+  addAdminLog(`   📝 Завершено: ${stressTestState.completed}/${stressTestState.totalUsers}`, 'info');
 }
 
 // --- Загрузка лучшего результата игрока ---
