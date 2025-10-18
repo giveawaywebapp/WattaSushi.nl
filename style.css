@@ -326,7 +326,7 @@ body {
   margin: 0; /* Убираем все отступы */
   padding: 10px 0; /* Минимальный padding сверху и снизу */
   position: fixed; /* Фиксируем хедер сверху */
-  top: 0; /* Прижимаем к самому верху */
+  top: 2%; /* Прижимаем к самому верху */
   left: 0;
   right: 0;
   z-index: 1000; /* Высокий z-index чтобы был поверх всего */
@@ -338,6 +338,7 @@ body {
   /* Убираем фон полностью */
   background: transparent;
   /* Убираем backdrop-filter */
+  
 }
 
 /* Анимированный хедер */
@@ -424,11 +425,11 @@ body {
 
 /* Анимация расхождения текста */
 .animated-header.animate .top-text {
-  transform: translateY(-30px);
+  transform: translateY(-20px);
 }
 
 .animated-header.animate .bottom-text {
-  transform: translateY(30px);
+  transform: translateY(20px);
 }
 
 .animated-header.animate .face-layer {
@@ -781,11 +782,11 @@ button:disabled {
   
   /* Оптимизация анимации хедера на планшетах */
   .animated-header.animate .top-text {
-    transform: translateY(-35px);
+    transform: translateY(-20px);
   }
 
   .animated-header.animate .bottom-text {
-    transform: translateY(35px);
+    transform: translateY(20px);
   }
 }
 
@@ -808,6 +809,7 @@ button:disabled {
   
   .header {
     height: 150px;
+   
   }
   
   .header-image {
@@ -822,11 +824,11 @@ button:disabled {
   
   /* Оптимизация анимации хедера на больших экранах */
   .animated-header.animate .top-text {
-    transform: translateY(-40px);
+    transform: translateY(-10px);
   }
 
   .animated-header.animate .bottom-text {
-    transform: translateY(40px);
+    transform: translateY(10px);
   }
 }
 
@@ -1649,8 +1651,8 @@ button:disabled {
 
   .header {
     margin: 0 !important;
-    padding: 5px 1 !important;
-    top: 2%;
+    padding: 5px 0 !important;
+    
     height: clamp(70px, 15vw, 80px) !important; /* Адаптивная высота на мобильных */
   }
 
@@ -1667,11 +1669,11 @@ button:disabled {
 
   /* Меньшее расхождение на мобильных */
   .animated-header.animate .top-text {
-    transform: translateY(-25px) !important;
+    transform: translateY(-15px) !important;
   }
 
   .animated-header.animate .bottom-text {
-    transform: translateY(25px) !important;
+    transform: translateY(15px) !important;
   }
   
   /* Оптимизация анимации хедера на мобильных */
