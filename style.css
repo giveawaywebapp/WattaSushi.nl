@@ -403,8 +403,8 @@ body {
 }
 
 .face-image {
-  max-width: 50px;
-  max-height: 50px;
+  max-width: 110px;
+  max-height: 110px;
   border-radius: 50%;
   animation: faceShake 0.6s ease-in-out;
 }
@@ -769,6 +769,7 @@ button:disabled {
   max-width: min(400px, 90vw);
   margin: clamp(15px, 4vw, 25px) auto 0 auto; /* Адаптивные отступы сверху */
   text-align: center;
+  top: 40px;
 }
 
 .promo-section.show {
@@ -885,8 +886,8 @@ button:disabled {
   }
   
   .face-image {
-    max-width: 60px;
-    max-height: 60px;
+    max-width: 110px;
+    max-height: 110px;
   }
   
   /* Оптимизация анимации хедера на планшетах */
@@ -1874,8 +1875,8 @@ button:disabled {
   }
 
   .face-image {
-    max-width: clamp(35px, 10vw, 45px) !important;
-    max-height: clamp(35px, 10vw, 45px) !important;
+    max-width: clamp(35px, 10vw, 70px) !important;
+    max-height: clamp(35px, 10vw, 70px) !important;
   }
 
   /* Меньшее расхождение на мобильных */
@@ -2028,8 +2029,8 @@ button:disabled {
   }
 
   .face-image {
-    max-width: 35px !important;
-    max-height: 35px !important;
+    max-width: 85px !important;
+    max-height: 85px !important;
   }
 
   .roulette-container {
