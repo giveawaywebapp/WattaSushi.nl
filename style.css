@@ -1650,7 +1650,7 @@ button:disabled {
   .header {
     margin: 0 !important;
     padding: 5px 1 !important;
-    top: 2@;
+    top: 2%;
     height: clamp(70px, 15vw, 80px) !important; /* Адаптивная высота на мобильных */
   }
 
