@@ -249,7 +249,7 @@ body {
 
 .face-image {
   max-width: 15vw; /* Процентная ширина viewport */
-  max-height: 8vh; /* Процентная высота viewport */
+  max-height: 12vh; /* Процентная высота viewport */
   min-width: 35px; /* Минимальный размер */
   min-height: 35px; /* Минимальный размер */
   border-radius: 50%;
