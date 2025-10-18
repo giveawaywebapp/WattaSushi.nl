@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover, shrink-to-fit=no">
+  <title>Watta Sushi</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="header">
+      <div class="animated-header">
+        <div class="text-layers">
+          <div class="text-layer top-text">
+            <img src="watta.png" alt="Watta" class="header-image">
+          </div>
+          <div class="text-layer bottom-text">
+            <img src="sushi.png" alt="Sushi" class="header-image">
+          </div>
+        </div>
+        <div class="face-layer">
+          <img src="face.png" alt="Face" class="header-image face-image">
+        </div>
+      </div>
+    </div>
+
+  <div class="roulette-container">
+    <div class="arrow"></div>
+    <div class="roulette">
+      <div class="wheel" id="wheel"></div>
+      <div class="center-circle">
+        <img src="LOGONOBACKGROUND.png" alt="Watta Sushi" class="center-logo">
+      </div>
+    </div>
+  </div>
+
+  <div class="controls">
+    <input type="text" id="insta" placeholder="Введіть ваш Instagram">
+    <button id="spinBtn">Почати</button>
+    <div class="result" id="result"></div>
+  </div>
+
+  <!-- Модальное окно приза -->
+  <div class="prize-modal" id="prizeModal">
+    <div class="prize-modal-content">
+      <h2>🎉 Вітаємо!</h2>
+      <div class="prize-emoji">🎁</div>
+      <h3 id="prizeText">Ви виграли приз!</h3>
+      <p class="prize-description">Ваш приз вже чекає на вас!</p>
+      
+      <!-- Подсказка про креветку (показывается только первый раз) -->
+      <div class="secret-hint" id="secretHint">
+        <div class="hint-divider"></div>
+        <p class="hint-text"> Псс... до речі, тут ще є щось цікаве...🦐</p>
+      </div>
+      
+      <button class="prize-close-btn" onclick="closePrizeModal()">Закрити</button>
+    </div>
+  </div>
+
+  <!-- Админ-панель -->
+  <div class="admin-panel" id="adminPanel">
+    <div class="admin-container">
+      <h2>🔐 Админ-панель</h2>
+      
+      <div class="admin-stats" id="adminStats">
+        <div class="stat-card">
+          <div class="stat-value" id="totalSpins">-</div>
+          <div class="stat-label">Всего прокруток</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value" id="totalFingerprints">-</div>
+          <div class="stat-label">Уникальных устройств</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value" id="totalInstagram">-</div>
+          <div class="stat-label">Уникальных Instagram</div>
+        </div>
+      </div>
+      
+      <div class="admin-actions">
+        <button class="admin-btn danger" onclick="clearFingerprints()">
+          🗑️ Очистить fingerprints
+        </button>
+        <button class="admin-btn danger" onclick="clearInstagram()">
+          🗑️ Очистить Instagram
+        </button>
+        <button class="admin-btn danger" onclick="clearAll()">
+          ⚠️ Очистить ВСЁ
+        </button>
+        <button class="admin-btn warning" onclick="exportData()">
+          📥 Экспорт данных
+        </button>
+        <button class="admin-btn critical" onclick="disableAdmin()">
+          🔒 ОТКЛЮЧИТЬ АДМИНКУ НАВСЕГДА
+        </button>
+      </div>
+      
+      <div class="admin-log" id="adminLog"></div>
+      
+      <button class="admin-close-btn" onclick="closeAdminPanel()">Закрыть</button>
+    </div>
+  </div>
+
+  <!-- Секретная миниигра - Рыбалка -->
+  <div class="minigame-overlay" id="minigameOverlay">
+    <div class="minigame-container" id="minigameContainer">
+      <!-- Стартовый экран -->
+      <div id="gameStart" class="game-screen">
+        <h2 id="gameStartTitle">🎣 Риболовля!</h2>
+        <div class="minigame-emoji">🦐</div>
+        <p id="gameStartText1">Ви знайшли секретну мінігру!</p>
+        <p id="gameStartText2">Тапайте по кнопці, щоб утримати<br>індикатор в зеленій зоні!</p>
+        <button class="minigame-button" onclick="startFishingGame()">🎮 Почати гру</button>
+        <button class="minigame-close" onclick="closeMinigame()">Закрити</button>
+      </div>
+
+      <!-- Экран игры -->
+      <div id="gamePlay" class="game-screen" style="display: none;">
+        <h3>🎣 Зловити креветку!</h3>
+        <div class="game-timer">Час: <span id="gameTimer">10</span>с</div>
+        <div class="game-score">Бали: <span id="gameScore">0</span></div>
+        
+        <div class="fishing-bar-container">
+          <div class="fishing-bar">
+            <div class="fishing-zone" id="fishingZone"></div>
+            <div class="fishing-indicator" id="fishingIndicator">🎣</div>
+          </div>
+        </div>
+        
+        <button class="tap-button" id="tapButton">
+          <span>ТАПАЙ!</span>
+        </button>
+        
+        <div class="game-hint">Тапайте щоб піднятися ⬆️</div>
+      </div>
+
+      <!-- Экран результата -->
+      <div id="gameEnd" class="game-screen" style="display: none;">
+        <h2 id="gameEndTitle">🎉 Результат</h2>
+        <div class="minigame-emoji" id="gameEndEmoji">🦐</div>
+        <div class="game-final-score">
+          <p>Ваш результат:</p>
+          <h1 id="finalScore">0</h1>
+          <p>балів</p>
+        </div>
+        
+        <!-- Лидерборд -->
+        <div class="leaderboard" id="leaderboard">
+          <h3>🏆 Топ гравців</h3>
+          <div class="leaderboard-list" id="leaderboardList">
+            <div class="loading">Завантаження...</div>
+          </div>
+        </div>
+        
+        <button class="minigame-button" onclick="startFishingGame()">🔄 Грати ще</button>
+        <button class="minigame-close" onclick="closeMinigame()">Закрити</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
