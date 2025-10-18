@@ -154,9 +154,57 @@ function updateTextPositions() {
 // Обработчик изменения размера окна
 window.addEventListener('resize', updateTextPositions);
 
+// Функции для управления видимостью элементов
+function hideControls() {
+  const controls = document.querySelector('.controls');
+  const input = document.getElementById('insta');
+  const button = document.getElementById('spinBtn');
+  
+  // Скрываем контролы с анимацией
+  controls.classList.add('hidden');
+  controls.classList.remove('visible');
+  
+  // Скрываем результат
+  resultEl.classList.add('hidden');
+  resultEl.classList.remove('visible');
+  
+  // Отключаем интерактивность
+  input.disabled = true;
+  button.disabled = true;
+}
+
+function showResult() {
+  // Показываем результат с анимацией
+  resultEl.classList.remove('hidden');
+  resultEl.classList.add('visible');
+}
+
+function showControls() {
+  const controls = document.querySelector('.controls');
+  const input = document.getElementById('insta');
+  const button = document.getElementById('spinBtn');
+  
+  // Показываем контролы с анимацией
+  controls.classList.remove('hidden');
+  controls.classList.add('visible');
+  
+  // Скрываем результат
+  resultEl.classList.add('hidden');
+  resultEl.classList.remove('visible');
+  
+  // Включаем интерактивность
+  input.disabled = false;
+  button.disabled = false;
+  
+  // Очищаем поле ввода
+  input.value = '';
+}
+
 // Запускаем анимацию при загрузке страницы
 document.addEventListener('DOMContentLoaded', function() {
   startHeaderAnimation();
+  // Инициализируем состояние контролов
+  showControls();
 });
 
   // Функция для повторного запуска анимации
@@ -435,10 +483,13 @@ spinBtn.onclick = async () => {
     return;
   }
 
-  // Проверяем через бэкенд (fingerprint + instagram)
+  // Скрываем контролы и показываем индикатор проверки
+  hideControls();
+  
+  // Показываем индикатор проверки
   resultEl.textContent = '🔍 Перевірка...';
   resultEl.style.color = '#12522D';
-  resultEl.style.display = 'flex';
+  showResult();
   
   try {
     const checkResponse = await fetch(`${API_URL}/check`, {
@@ -467,6 +518,11 @@ spinBtn.onclick = async () => {
             `Instagram: @${checkResult.data.instagram}\n` +
             `Приз: ${checkResult.data.prize}\n` +
             `Дата: ${checkResult.data.timestamp}`);
+      
+      // Показываем контролы обратно
+      setTimeout(() => {
+        showControls();
+      }, 1000);
       return;
     }
   } catch (error) {
@@ -474,12 +530,16 @@ spinBtn.onclick = async () => {
     alert('❌ Помилка з сервером. Перевірте підключення до інтернету.');
     resultEl.textContent = '❌ Помилка з сервером';
     resultEl.style.color = '#e74c3c';
+    
+    // Показываем контролы обратно
+    setTimeout(() => {
+      showControls();
+    }, 1000);
     return;
   }
 
- 
+  // Начинаем прокрутку
   isSpinning = true;
-  spinBtn.disabled = true;
   resultEl.textContent = '🎰 Крутимо...';
   resultEl.style.color = '#12522D';
 
@@ -493,11 +553,14 @@ spinBtn.onclick = async () => {
 
   setTimeout(async () => {
     const prize = rolls[randomIndex];
+    
+    // Показываем результат с анимацией
     resultEl.textContent = `🎉 Ви виграли: ${prize}!`;
     resultEl.style.color = '#12522D';
     
     await saveResult(insta, prize);
     
+    // Показываем модальное окно через небольшую задержку
     setTimeout(() => {
       showPrizeModal(prize);
     }, 500);
@@ -558,6 +621,11 @@ function showPrizeModal(prize) {
 window.closePrizeModal = function() {
   const modal = document.getElementById('prizeModal');
   modal.classList.remove('active');
+  
+  // Восстанавливаем контролы после закрытия модального окна
+  setTimeout(() => {
+    showControls();
+  }, 300); // Небольшая задержка для плавности
 };
 
 // --- Секретная миниигра ---
@@ -598,6 +666,11 @@ window.closeMinigame = function() {
   document.getElementById('gameStart').style.display = 'block';
   document.getElementById('gamePlay').style.display = 'none';
   document.getElementById('gameEnd').style.display = 'none';
+  
+  // Восстанавливаем контролы после закрытия миниигры
+  setTimeout(() => {
+    showControls();
+  }, 300);
   
   
 }
