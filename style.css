@@ -258,7 +258,7 @@ body {
   min-width: 50px; /* Увеличенный минимальный размер */
   min-height: 50px; /* Увеличенный минимальный размер */
   border-radius: 50%;
-  animation: faceShake 2.2s ease-in-out; /* Увеличена длительность до 1.5 секунд */
+  animation: faceShake 1.5s ease-in-out; /* Увеличена длительность до 1.5 секунд */
   transition: all 0.3s ease;
 }
 
@@ -357,6 +357,44 @@ body {
     filter: drop-shadow(0 0 6px rgba(255, 235, 59, 0.5)) drop-shadow(0 0 12px rgba(255, 193, 7, 0.4)) !important;
   }
   
+  /* Оптимизация миниигры для мобильных */
+  .minigame-container {
+    padding: 20px !important;
+    margin: 10px !important;
+    max-height: 95vh !important;
+    border-radius: 20px !important;
+  }
+  
+  .minigame-container h2 {
+    font-size: 28px !important;
+    margin-bottom: 15px !important;
+  }
+  
+  .minigame-container h3 {
+    font-size: 20px !important;
+    margin-bottom: 10px !important;
+  }
+  
+  .minigame-container p {
+    font-size: 16px !important;
+    margin-bottom: 10px !important;
+  }
+  
+  .minigame-emoji {
+    font-size: 80px !important;
+    margin: 20px 0 !important;
+  }
+  
+  .fishing-bar {
+    height: 300px !important;
+  }
+  
+  .tap-button {
+    width: clamp(100px, 20vw, 150px) !important;
+    height: clamp(100px, 20vw, 150px) !important;
+    font-size: clamp(14px, 4vw, 24px) !important;
+  }
+  
   .center-circle {
     width: 20vw !important; /* Увеличенный центр */
     height: 20vw !important;
@@ -427,6 +465,35 @@ body {
     filter: drop-shadow(0 0 7px rgba(255, 235, 59, 0.5)) drop-shadow(0 0 14px rgba(255, 193, 7, 0.4)) !important;
   }
   
+  /* Оптимизация миниигры для средних экранов */
+  .minigame-container {
+    padding: 30px !important;
+    margin: 15px !important;
+    max-height: 92vh !important;
+  }
+  
+  .minigame-container h2 {
+    font-size: 32px !important;
+  }
+  
+  .minigame-container h3 {
+    font-size: 22px !important;
+  }
+  
+  .minigame-container p {
+    font-size: 18px !important;
+  }
+  
+  .fishing-bar {
+    height: 350px !important;
+  }
+  
+  .tap-button {
+    width: clamp(110px, 22vw, 170px) !important;
+    height: clamp(110px, 22vw, 170px) !important;
+    font-size: clamp(16px, 4.5vw, 28px) !important;
+  }
+  
   .center-circle {
     width: 16vw !important; /* Увеличенный центр */
     height: 16vw !important;
@@ -489,6 +556,35 @@ body {
   .floating-emoji.shrimp {
     font-size: 50px !important; /* Полный размер */
     filter: drop-shadow(0 0 8px rgba(255, 235, 59, 0.4)) drop-shadow(0 0 16px rgba(255, 193, 7, 0.3)) !important;
+  }
+  
+  /* Оптимизация миниигры для больших экранов */
+  .minigame-container {
+    padding: 40px !important;
+    margin: 20px !important;
+    max-height: 90vh !important;
+  }
+  
+  .minigame-container h2 {
+    font-size: 36px !important;
+  }
+  
+  .minigame-container h3 {
+    font-size: 24px !important;
+  }
+  
+  .minigame-container p {
+    font-size: 20px !important;
+  }
+  
+  .fishing-bar {
+    height: 400px !important;
+  }
+  
+  .tap-button {
+    width: clamp(120px, 25vw, 200px) !important;
+    height: clamp(120px, 25vw, 200px) !important;
+    font-size: clamp(18px, 5vw, 32px) !important;
   }
   
   .center-circle {
@@ -1360,6 +1456,10 @@ button:disabled {
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
   animation: slideIn 0.5s ease;
   position: relative;
+  /* Предотвращаем выход за пределы экрана */
+  max-height: 90vh;
+  overflow-y: auto;
+  margin: 20px;
 }
 
 .minigame-container h2 {
@@ -1512,14 +1612,16 @@ button:disabled {
   -webkit-user-select: none;
   user-select: none;
   touch-action: manipulation;
-  /* Центрируем кнопку */
+  /* Правильное центрирование кнопки */
   position: relative;
   left: 50%;
   transform: translateX(-50%);
+  /* Убираем конфликтующие стили */
+  text-align: center;
 }
 
 .tap-button:active {
-  transform: scale(0.95);
+  transform: scale(0.95) translateX(-50%);
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
   /* Мгновенный отклик без задержки */
   transition: none;
