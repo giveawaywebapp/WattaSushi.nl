@@ -82,6 +82,8 @@ body {
   position: relative;
   will-change: transform;
   transform: translateZ(0);
+  /* Добавляем свечение для креветок */
+  filter: drop-shadow(0 0 8px rgba(255, 235, 59, 0.4)) drop-shadow(0 0 16px rgba(255, 193, 7, 0.3));
 }
 
 /* Создаем большую невидимую область клика вокруг креветки */
@@ -119,12 +121,13 @@ body {
 .floating-emoji.shrimp:hover {
   opacity: 0.35 !important;
   transform: scale(1.1) !important;
+  filter: drop-shadow(0 0 12px rgba(255, 235, 59, 0.6)) drop-shadow(0 0 24px rgba(255, 193, 7, 0.5)) !important;
 }
 
 /* При активном касании - яркий эффект */
 .floating-emoji.shrimp:active {
   opacity: 0.6 !important;
-  filter: drop-shadow(0 0 20px rgba(255, 235, 59, 0.8)) !important;
+  filter: drop-shadow(0 0 20px rgba(255, 235, 59, 0.8)) drop-shadow(0 0 40px rgba(255, 193, 7, 0.6)) !important;
   transform: scale(1.2) !important;
   z-index: 100 !important;
 }
@@ -174,7 +177,7 @@ body {
   width: 100%;
   height: 15vh; /* Процентная высота viewport */
   min-height: 60px; /* Минимальная высота для очень маленьких экранов */
-  max-height: 15%; /* Максимальная высота для больших экранов */
+  max-height: 17%; /* Максимальная высота для больших экранов */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -211,12 +214,12 @@ body {
 }
 
 .top-text {
-  top: 5px;
+  top: 1vh; /* Процентное позиционирование */
   transform: translateY(0);
 }
 
 .bottom-text {
-  bottom: 5px;
+  bottom: 1vh; /* Процентное позиционирование */
   transform: translateY(0);
 }
 
@@ -245,15 +248,17 @@ body {
   object-fit: contain;
   filter: drop-shadow(0 0.5vh 1vh rgba(0, 0, 0, 0.3));
   transition: all 0.3s ease;
+  /* Убираем font-weight для изображений */
+  font-weight: normal;
 }
 
 .face-image {
-  max-width: 15vw; /* Процентная ширина viewport */
-  max-height: 12vh; /* Процентная высота viewport */
-  min-width: 35px; /* Минимальный размер */
-  min-height: 35px; /* Минимальный размер */
+  max-width: 15vw; /* Увеличенная ширина для лучшей видимости */
+  max-height: 12vh; /* Увеличенная высота для лучшей видимости */
+  min-width: 50px; /* Увеличенный минимальный размер */
+  min-height: 50px; /* Увеличенный минимальный размер */
   border-radius: 50%;
-  animation: faceShake 0.6s ease-in-out;
+  animation: faceShake 1.5s ease-in-out; /* Увеличена длительность до 1.5 секунд */
   transition: all 0.3s ease;
 }
 
@@ -273,16 +278,248 @@ body {
 
 /* Анимация расхождения текста */
 .animated-header.animate .top-text {
-  transform: translateY(-20px);
+  transform: translateY(-1.5vh); /* Процентное смещение */
 }
 
 .animated-header.animate .bottom-text {
-  transform: translateY(20px);
+  transform: translateY(1.5vh); /* Процентное смещение */
+}
+
+/* Ограничиваем анимацию на мобильных устройствах */
+@media (max-width: 768px) {
+  .animated-header.animate .top-text {
+    transform: translateY(-1vh); /* Уменьшенное смещение для мобильных */
+  }
+  
+  .animated-header.animate .bottom-text {
+    transform: translateY(1vh); /* Уменьшенное смещение для мобильных */
+  }
 }
 
 .animated-header.animate .face-layer {
   opacity: 1;
   transform: scale(1) translateY(0);
+}
+
+/* Маленькие экраны (до 480px) - компактный но крупный интерфейс */
+@media (max-width: 480px) {
+  body {
+    padding: 18vh 2vw 2vh 2vw !important; /* Увеличенные отступы для большего хедера */
+  }
+  
+  .header {
+    height: 15vh !important; /* Увеличенная высота */
+    min-height: 80px !important;
+  }
+  
+  .face-image {
+    max-width: 22vw !important; /* Увеличенное лицо */
+    max-height: 15vh !important;
+    min-width: 70px !important;
+    min-height: 70px !important;
+  }
+  
+  .header-image {
+    max-width: 30vw !important; /* Увеличенные логотипы */
+    max-height: 8vh !important;
+    min-width: 90px !important;
+    min-height: 25px !important;
+    font-weight: 300 !important; /* Понижаем font-weight для мобильных */
+  }
+  
+  .top-text {
+    top: 0.3vh !important;
+  }
+  
+  .bottom-text {
+    bottom: 0.3vh !important;
+  }
+  
+  .animated-header.animate .top-text {
+    transform: translateY(-0.5vh) !important; /* Еще меньше смещение */
+  }
+  
+  .animated-header.animate .bottom-text {
+    transform: translateY(0.5vh) !important; /* Еще меньше смещение */
+  }
+  
+  /* Рулетка - компактная но крупная */
+  .roulette {
+    width: 80vw !important; /* Увеличено для лучшего использования пространства */
+    height: 80vw !important;
+    min-width: 200px !important;
+    min-height: 200px !important;
+  }
+  
+  /* Оптимизация креветок для мобильных */
+  .floating-emoji.shrimp {
+    font-size: 45px !important; /* Немного меньше для мобильных */
+    filter: drop-shadow(0 0 6px rgba(255, 235, 59, 0.5)) drop-shadow(0 0 12px rgba(255, 193, 7, 0.4)) !important;
+  }
+  
+  .center-circle {
+    width: 20vw !important; /* Увеличенный центр */
+    height: 20vw !important;
+    min-width: 70px !important;
+    min-height: 70px !important;
+  }
+  
+  .prize-text {
+    font-size: clamp(11px, 3.5vw, 15px) !important; /* Увеличенный текст */
+    width: 22vw !important;
+    min-width: 85px !important;
+  }
+  
+  /* Контролы - компактные но крупные */
+  .controls {
+    padding: 2vh 4vw !important; /* Увеличенные отступы */
+    gap: 2vh !important; /* Увеличенные промежутки */
+    width: 95vw !important;
+    margin: 2vh auto 0 auto !important;
+  }
+  
+  .roulette-container {
+    margin: 2vh 0 2.5vh 0 !important; /* Увеличенные отступы */
+  }
+  
+  input, button {
+    padding: 2vh 3vw !important; /* Увеличенные отступы */
+    font-size: clamp(15px, 4.5vw, 18px) !important; /* Увеличенный шрифт */
+  }
+}
+
+/* Средние экраны (481px - 768px) - оптимальный размер */
+@media (min-width: 481px) and (max-width: 768px) {
+  body {
+    padding: 19vh 3vw 3vh 3vw !important; /* Увеличенные отступы для большего хедера */
+  }
+  
+  .header {
+    height: 16vh !important; /* Увеличенная высота */
+    min-height: 90px !important;
+  }
+  
+  .face-image {
+    max-width: 15vw !important; /* Увеличенное лицо */
+    max-height: 12vh !important;
+    min-width: 60px !important;
+    min-height: 60px !important;
+  }
+  
+  .header-image {
+    max-width: 20vw !important; /* Увеличенные логотипы */
+    max-height: 6vh !important;
+    min-width: 100px !important;
+    min-height: 30px !important;
+    font-weight: 400 !important; /* Понижаем font-weight для средних экранов */
+  }
+  
+  .roulette {
+    width: 65vw !important; /* Увеличено для лучшего использования пространства */
+    height: 65vw !important;
+    max-width: 450px !important;
+    max-height: 450px !important;
+  }
+  
+  /* Оптимизация креветок для средних экранов */
+  .floating-emoji.shrimp {
+    font-size: 48px !important; /* Средний размер */
+    filter: drop-shadow(0 0 7px rgba(255, 235, 59, 0.5)) drop-shadow(0 0 14px rgba(255, 193, 7, 0.4)) !important;
+  }
+  
+  .center-circle {
+    width: 16vw !important; /* Увеличенный центр */
+    height: 16vw !important;
+    max-width: 100px !important;
+    max-height: 100px !important;
+  }
+  
+  .prize-text {
+    font-size: clamp(11px, 2.5vw, 14px) !important; /* Увеличенный текст */
+    width: 18vw !important;
+    max-width: 120px !important;
+  }
+  
+  .controls {
+    margin: 2.5vh auto 0 auto !important; /* Увеличенные отступы */
+    padding: 2.5vh 3vw !important; /* Увеличенные отступы */
+    gap: 2.5vh !important; /* Увеличенные промежутки */
+  }
+  
+  .roulette-container {
+    margin: 2.5vh 0 3vh 0 !important; /* Увеличенные отступы */
+  }
+  
+  input, button {
+    padding: 2.5vh 3vw !important; /* Увеличенные отступы */
+    font-size: clamp(15px, 3.5vw, 18px) !important; /* Увеличенный шрифт */
+  }
+}
+
+/* Большие экраны (от 769px) - пропорциональный размер */
+@media (min-width: 769px) {
+  body {
+    padding: 17vh 4vw 4vh 4vw !important; /* Увеличенные отступы для большего хедера */
+  }
+  
+  .header {
+    height: 14vh !important; /* Увеличенная высота */
+    max-height: 120px !important;
+  }
+  
+  .face-image {
+    max-width: 70px !important; /* Увеличенное лицо */
+    max-height: 70px !important;
+  }
+  
+  .header-image {
+    max-width: 160px !important; /* Увеличенные логотипы */
+    max-height: 40px !important;
+    font-weight: 500 !important; /* Умеренный font-weight для больших экранов */
+  }
+  
+  .roulette {
+    width: 55vw !important; /* Увеличено для лучшего использования пространства */
+    height: 55vw !important;
+    max-width: 500px !important;
+    max-height: 500px !important;
+  }
+  
+  /* Оптимизация креветок для больших экранов */
+  .floating-emoji.shrimp {
+    font-size: 50px !important; /* Полный размер */
+    filter: drop-shadow(0 0 8px rgba(255, 235, 59, 0.4)) drop-shadow(0 0 16px rgba(255, 193, 7, 0.3)) !important;
+  }
+  
+  .center-circle {
+    width: 14vw !important; /* Увеличенный центр */
+    height: 14vw !important;
+    max-width: 120px !important;
+    max-height: 120px !important;
+  }
+  
+  .prize-text {
+    font-size: clamp(12px, 2.2vw, 16px) !important; /* Увеличенный текст */
+    width: 16vw !important;
+    max-width: 130px !important;
+  }
+  
+  .controls {
+    width: 80vw !important;
+    max-width: 400px !important; /* Увеличена максимальная ширина */
+    margin: 3vh auto 0 auto !important; /* Увеличенные отступы */
+    padding: 3vh 3vw !important; /* Увеличенные отступы */
+    gap: 3vh !important; /* Увеличенные промежутки */
+  }
+  
+  .roulette-container {
+    margin: 3vh 0 4vh 0 !important; /* Увеличенные отступы */
+  }
+  
+  input, button {
+    padding: 3vh 3vw !important; /* Увеличенные отступы */
+    font-size: clamp(16px, 2.5vw, 20px) !important; /* Увеличенный шрифт */
+  }
 }
 
 .roulette-container {
