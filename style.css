@@ -65,9 +65,9 @@ body {
   cursor: pointer;
   pointer-events: auto;
   font-size: 50px; /* Немного больше минимального размера */
-  opacity: 0.30; /* Как у обычных эмоджи */
+  opacity: 0.50; /* Как у обычных эмоджи */
   z-index: 1; /* Чуть выше обычных, но незаметно */
-  animation: float-emoji ease-in-out infinite; /* Обычная анимация */
+  animation: float-emoji-shrimp ease-in-out infinite; /* Анимация для креветок с повышенной прозрачностью */
   transition: all 0.3s ease;
   /* Оптимизация для мобильных устройств */
   -webkit-tap-highlight-color: transparent;
@@ -83,7 +83,7 @@ body {
   will-change: transform;
   transform: translateZ(0);
   /* Добавляем свечение для креветок */
-  filter: drop-shadow(0 0 8px rgba(255, 235, 59, 0.4)) drop-shadow(0 0 16px rgba(255, 193, 7, 0.3));
+  filter: drop-shadow(0 2px 8px rgba(255, 235, 59, 0.7)) drop-shadow(0 0 16px rgba(255, 193, 7, 0.7));
 }
 
 /* Создаем большую невидимую область клика вокруг креветки */
@@ -127,7 +127,7 @@ body {
 /* При активном касании - яркий эффект */
 .floating-emoji.shrimp:active {
   opacity: 0.6 !important;
-  filter: drop-shadow(0 0 20px rgba(255, 235, 59, 0.8)) drop-shadow(0 0 40px rgba(255, 193, 7, 0.6)) !important;
+  filter: drop-shadow(0 0 20px rgba(255, 235, 59, 0.8)) drop-shadow(0 0 40px rgba(255, 193, 7, 0.8)) !important;
   transform: scale(1.2) !important;
   z-index: 100 !important;
 }
@@ -158,6 +158,38 @@ body {
   90% {
     transform: translateY(-80vh) translateX(var(--x-offset)) rotate(324deg);
     opacity: 0.25;
+  }
+  100% {
+    transform: translateY(-100vh) translateX(0) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+/* Отдельная анимация для креветок с повышенной прозрачностью */
+@keyframes float-emoji-shrimp {
+  0% {
+    transform: translateY(100vh) translateX(0) rotate(0deg);
+    opacity: 0;
+  }
+  10% {
+    transform: translateY(80vh) translateX(var(--x-offset)) rotate(36deg);
+    opacity: 0.5;
+  }
+  25% {
+    transform: translateY(50vh) translateX(0) rotate(90deg);
+    opacity: 0.5;
+  }
+  50% {
+    transform: translateY(0vh) translateX(var(--x-offset)) rotate(180deg);
+    opacity: 0.5;
+  }
+  75% {
+    transform: translateY(-50vh) translateX(0) rotate(270deg);
+    opacity: 0.5;
+  }
+  90% {
+    transform: translateY(-80vh) translateX(var(--x-offset)) rotate(324deg);
+    opacity: 0.5;
   }
   100% {
     transform: translateY(-100vh) translateX(0) rotate(360deg);
@@ -354,7 +386,7 @@ body {
   /* Оптимизация креветок для мобильных */
   .floating-emoji.shrimp {
     font-size: 45px !important; /* Немного меньше для мобильных */
-    filter: drop-shadow(0 0 6px rgba(255, 235, 59, 0.5)) drop-shadow(0 0 12px rgba(255, 193, 7, 0.4)) !important;
+    filter: drop-shadow(0 0 7px rgba(255, 235, 59, 0.7)) drop-shadow(0 0 12px rgba(255, 193, 7, 0.7)) !important;
   }
   
   /* Оптимизация миниигры для мобильных */
@@ -478,7 +510,7 @@ body {
   /* Оптимизация креветок для средних экранов */
   .floating-emoji.shrimp {
     font-size: 48px !important; /* Средний размер */
-    filter: drop-shadow(0 0 7px rgba(255, 235, 59, 0.5)) drop-shadow(0 0 14px rgba(255, 193, 7, 0.4)) !important;
+    filter: drop-shadow(0 0 7px rgba(255, 235, 59, 0.7)) drop-shadow(0 0 14px rgba(255, 193, 7, 0.8)) !important;
   }
   
   /* Оптимизация миниигры для средних экранов */

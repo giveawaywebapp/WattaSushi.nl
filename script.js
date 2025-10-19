@@ -862,7 +862,7 @@ function createFloatingEmojis() {
           
   const isMobile = window.innerWidth <= 768;
   const isTablet = window.innerWidth <= 1024;
-  const emojiCount = isMobile ? 14 : (isTablet ? 18 : 22); // Больше эмоджи для лучшего эффекта
+  const emojiCount = isMobile ? 18 : (isTablet ? 22 : 28); // Больше эмоджи для лучшего эффекта
 
   // Создаем контейнер для эмоджи, чтобы они не влияли на размер страницы
   let emojiContainer = document.getElementById('emoji-container');
@@ -886,7 +886,7 @@ function createFloatingEmojis() {
   const emojiPool = [...emojis];
   
   // РОВНО 3 креветки на всех экранах
-  const shrimpCount = 3; // Всегда 3 креветки
+  const shrimpCount = 7; // Всегда 3 креветки
   for (let i = 0; i < shrimpCount; i++) {
     emojiPool.push('🦐');
   }
