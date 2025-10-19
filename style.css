@@ -58,6 +58,8 @@ body {
   /* Оптимизация производительности */
   will-change: transform;
   transform: translateZ(0);
+  /* Добавляем легкое свечение для всех эмоджи */
+  filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.2));
 }
 
 /* Креветки кликабельны - выглядят КАК ОБЫЧНЫЕ эмоджи, но с оптимизацией тача */
@@ -65,7 +67,7 @@ body {
   cursor: pointer;
   pointer-events: auto;
   font-size: 50px; /* Немного больше минимального размера */
-  opacity: 0.30; /* Как у обычных эмоджи */
+  opacity: 0.45; /* Как у обычных эмоджи */
   z-index: 1; /* Чуть выше обычных, но незаметно */
   animation: float-emoji ease-in-out infinite; /* Обычная анимация */
   transition: all 0.3s ease;
@@ -83,7 +85,7 @@ body {
   will-change: transform;
   transform: translateZ(0);
   /* Добавляем свечение для креветок */
-  filter: drop-shadow(0 0 8px rgba(255, 235, 59, 0.4)) drop-shadow(0 0 16px rgba(255, 193, 7, 0.3));
+  filter: drop-shadow(0 0 8px rgba(255, 235, 59, 0.5)) drop-shadow(0 0 16px rgba(255, 193, 7, 0.4));
 }
 
 /* Создаем большую невидимую область клика вокруг креветки */
@@ -1616,8 +1618,12 @@ button:disabled {
   height: 80px;
   background: rgba(76, 175, 80, 0.4);
   border: 3px dashed #4caf50;
-  transition: top 0.3s ease;
+  /* Убираем transition для лучшей производительности */
+  transition: none;
   box-shadow: 0 0 20px rgba(76, 175, 80, 0.6);
+  /* Оптимизация производительности */
+  will-change: transform;
+  transform: translateZ(0);
 }
 
 .fishing-indicator {
@@ -1633,7 +1639,11 @@ button:disabled {
   justify-content: center;
   font-size: 22px; /* Уменьшаем размер эмодзи */
   box-shadow: 0 3px 12px rgba(0, 0, 0, 0.4);
-  transition: top 0.05s linear;
+  /* Оптимизация производительности - убираем transition */
+  transition: none;
+  /* Используем transform3d для GPU ускорения */
+  will-change: transform;
+  transform: translateX(-50%) translateZ(0);
 }
 
 .tap-button {
@@ -1662,12 +1672,16 @@ button:disabled {
   /* Идеальное центрирование кнопки */
   position: relative;
   left: 50%;
-  transform: translateX(-50%);
+  transform: translateX(-50%) translateZ(0); /* GPU ускорение */
   text-align: center;
+  /* Оптимизация производительности */
+  will-change: transform;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
 }
 
 .tap-button:active {
-  transform: scale(0.95) translateX(-50%);
+  transform: scale(0.95) translateX(-50%) translateZ(0);
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
   /* Мгновенный отклик без задержки */
   transition: none;
