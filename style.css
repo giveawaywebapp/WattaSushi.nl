@@ -258,7 +258,7 @@ body {
   min-width: 50px; /* Увеличенный минимальный размер */
   min-height: 50px; /* Увеличенный минимальный размер */
   border-radius: 50%;
-  animation: faceShake 1.5s ease-in-out; /* Увеличена длительность до 1.5 секунд */
+  animation: faceShake 2.2s ease-in-out; /* Увеличена длительность до 1.5 секунд */
   transition: all 0.3s ease;
 }
 
