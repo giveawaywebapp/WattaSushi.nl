@@ -400,6 +400,9 @@ body {
     height: clamp(80px, 18vw, 120px) !important;
     font-size: clamp(12px, 3.5vw, 20px) !important;
     margin: 10px auto !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
   }
   
   .game-timer,
@@ -515,6 +518,9 @@ body {
     height: clamp(90px, 19vw, 140px) !important;
     font-size: clamp(14px, 4vw, 24px) !important;
     margin: 12px auto !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
   }
   
   .game-timer,
@@ -624,6 +630,9 @@ body {
     height: clamp(100px, 20vw, 180px) !important;
     font-size: clamp(16px, 4vw, 28px) !important;
     margin: 15px auto !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
   }
   
   .game-timer,
@@ -1648,7 +1657,7 @@ button:disabled {
   cursor: pointer;
   /* УБИРАЕМ ЗАДЕРЖКУ - мгновенный отклик */
   transition: none;
-  margin: 15px auto; /* Уменьшенный отступ */
+  margin: 15px auto; /* Центрирование кнопки */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1660,14 +1669,11 @@ button:disabled {
   user-select: none;
   touch-action: manipulation;
   /* Идеальное центрирование кнопки */
-  position: relative;
-  left: 50%;
-  transform: translateX(-50%);
   text-align: center;
 }
 
 .tap-button:active {
-  transform: scale(0.95) translateX(-50%);
+  transform: scale(0.95);
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
   /* Мгновенный отклик без задержки */
   transition: none;
